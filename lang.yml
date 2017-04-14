@@ -1,0 +1,5 @@
+# Double your quote to avoid error, like 'I can''t fly'
+color: '&'
+noCraftAllow: '&cThe craft for this item is forbidden'
+noPerm: '&cYou aren''t allow do to this'
+reload: '&aReload complete'

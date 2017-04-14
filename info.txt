@@ -1,0 +1,13 @@
+hnvprepareItemCraftEvent
+ config
+ 	blacklist item craft
+ 	blacklist recipe craft
+
+getRecipe - BlackListed - List
+getResult - BlackListed - List
+
+add some craft
+	patterns.yml with translator of char pattern
+	custom item
+	with shape or with list material
+ 
