@@ -115,6 +115,7 @@ public static void loadAllConfig(Map<String, PluginConfiguration> configs)	{
 
 	public static void loadConverter(PluginConfiguration config) {
 		
+		DreamCraft.converter.clear();
 		for (String str : config.getKeys(false))	{
 			if (str.length() == 1)	{
 				char c = str.charAt(0);

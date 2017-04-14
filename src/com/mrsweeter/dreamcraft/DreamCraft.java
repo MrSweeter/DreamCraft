@@ -32,7 +32,7 @@ public class DreamCraft extends JavaPlugin	{
 		configs.put("lang", new PluginConfiguration(this, "lang.yml", "lang.yml", null));
 		configs.put("blacklist", new PluginConfiguration(this, "blacklist.yml", "blacklist.yml", null));
 		configs.put("converter", new PluginConfiguration(this, "shapeConverter.yml", "shapeConverter.yml", null));
-		configs.put("craft", new PluginConfiguration(this, "craft.yml", "craft.yml", null));
+		configs.put("craft", new PluginConfiguration(this, "craft.yml"));
 		
 		Loader.loadLanguage(configs.get("lang"));
 		Loader.loadBlacklist(this, configs.get("blacklist"));

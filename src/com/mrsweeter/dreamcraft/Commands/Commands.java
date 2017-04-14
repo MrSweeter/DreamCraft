@@ -27,6 +27,8 @@ public class Commands implements CommandExecutor	{
 				Loader.loadAllConfig(pl.getAllConfig());
 				Loader.loadLanguage(pl.getAConfig("lang"));
 				Loader.loadBlacklist(pl, pl.getAConfig("blacklist"));
+				Loader.loadConverter(pl.getAConfig("converter"));
+				Loader.loadCraft(pl, pl.getAConfig("craft"));
 				sender.sendMessage("§c[§aDreamCraft§c] " + Language.reload);
 				
 				break;
