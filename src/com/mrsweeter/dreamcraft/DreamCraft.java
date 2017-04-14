@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.inventory.Recipe;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,7 +24,7 @@ public class DreamCraft extends JavaPlugin	{
 	
 	Map<String, PluginConfiguration> configs = new HashMap<String, PluginConfiguration>();
 	public static List<String> blacklist_item = new ArrayList<String>();
-	public static Map<String, List<Recipe>> blacklist_craft = new HashMap<String, List<Recipe>>();
+	public static List<String> blacklist_coloration = new ArrayList<String>();
 	public static Map<Character, Material> converter = new HashMap<Character, Material>();
 	
 	public void onEnable()	{

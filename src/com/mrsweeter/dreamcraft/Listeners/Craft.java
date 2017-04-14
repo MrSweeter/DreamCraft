@@ -1,5 +1,9 @@
 package com.mrsweeter.dreamcraft.Listeners;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.EventHandler;
@@ -22,7 +26,8 @@ public class Craft implements Listener {
 	public void onCraft(PrepareItemCraftEvent event)	{
 		
 		Material result = event.getRecipe().getResult().getType();
-		event.getInventory().getMatrix();
+		List<String> ingredients = loadStringIngredient(Arrays.asList(event.getInventory().getContents()));
+		ingredients.retainAll(DreamCraft.blacklist_coloration);
 		
 		if (DreamCraft.blacklist_item.contains(result.toString().toLowerCase()))	{
 			event.getInventory().setResult(new ItemStack(Material.AIR));
@@ -30,6 +35,21 @@ public class Craft implements Listener {
 			for (HumanEntity p : event.getViewers())	{
 				p.sendMessage(Language.noCraftAllow);
 			}
+		} else if (ingredients.size() >= 2)	{
+			event.getInventory().setResult(new ItemStack(Material.AIR));
+			
+			for (HumanEntity p : event.getViewers())	{
+				p.sendMessage(Language.incompatibleItem);
+			}
 		}
+	}
+	
+	private static List<String> loadStringIngredient(List<ItemStack> list)	{
+		
+		List<String> l = new ArrayList<String>();
+		for (ItemStack i : list)	{
+			l.add(i.getType().toString().toLowerCase());
+		}
+		return l;
 	}
 }

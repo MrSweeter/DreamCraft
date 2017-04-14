@@ -26,12 +26,16 @@ public static void loadAllConfig(Map<String, PluginConfiguration> configs)	{
 	public static void loadBlacklist(DreamCraft pl, PluginConfiguration config) {
 		
 		DreamCraft.blacklist_item.clear();
-		DreamCraft.blacklist_craft.clear();
+		DreamCraft.blacklist_coloration.clear();
 		pl.getServer().resetRecipes();
 		
 		List<String> list = config.getStringList("item-craft");
 		for (String str : list)	{
 			DreamCraft.blacklist_item.add(str.toLowerCase());
+		}
+		list = config.getStringList("item-incompatible");
+		for (String str : list)	{
+			DreamCraft.blacklist_coloration.add(str.toLowerCase());
 		}
 		
 		list = config.getStringList("item-recipe");
@@ -56,6 +60,7 @@ public static void loadAllConfig(Map<String, PluginConfiguration> configs)	{
 		Language.noCraftAllow = config.getString("noCraftAllow").replace(DreamCraft.color, "§");		
 		Language.noPerm = config.getString("noPerm").replace(DreamCraft.color, "§");		
 		Language.reload = config.getString("reload").replace(DreamCraft.color, "§");
+		Language.incompatibleItem = config.getString("incompatibleItem").replace(DreamCraft.color, "§");
 		
 	}
 
