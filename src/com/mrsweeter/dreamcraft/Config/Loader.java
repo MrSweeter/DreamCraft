@@ -27,6 +27,7 @@ public static void loadAllConfig(Map<String, PluginConfiguration> configs)	{
 		
 		DreamCraft.blacklist_item.clear();
 		DreamCraft.blacklist_craft.clear();
+		pl.getServer().resetRecipes();
 		
 		List<String> list = config.getStringList("item-craft");
 		for (String str : list)	{
