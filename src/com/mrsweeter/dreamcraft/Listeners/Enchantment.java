@@ -15,7 +15,7 @@ import com.mrsweeter.dreamcraft.Language;
 
 public class Enchantment implements Listener	{
 	
-DreamCraft pl;
+	DreamCraft pl;
 	
 	public Enchantment(DreamCraft pl)	{
 		this.pl = pl;
@@ -45,7 +45,7 @@ DreamCraft pl;
 		}
 	}
 	
-	private static List<String> loadStringEnchant(Map<org.bukkit.enchantments.Enchantment, Integer> list)	{
+	public static List<String> loadStringEnchant(Map<org.bukkit.enchantments.Enchantment, Integer> list)	{
 		
 		List<String> l = new ArrayList<String>();
 		

@@ -31,37 +31,55 @@ public static void loadAllConfig(Map<String, PluginConfiguration> configs)	{
 		DreamCraft.blacklist_itemEnchant.clear();
 		pl.getServer().resetRecipes();
 		
-		List<String> list = config.getStringList("item-craft");
-		for (String str : list)	{
-			DreamCraft.blacklist_item.add(str.toLowerCase());
+		List<String> list;
+		
+		if (config.isSet("item-craft"))	{
+			list = config.getStringList("item-craft");
+			for (String str : list)	{
+				DreamCraft.blacklist_item.add(str.toLowerCase());
+			}
 		}
 		
-		list = config.getStringList("item-incompatible");
-		for (String str : list)	{
-			DreamCraft.blacklist_coloration.add(str.toLowerCase());
+		if (config.isSet("item-incompatible"))	{
+			list = config.getStringList("item-incompatible");
+			for (String str : list)	{
+				DreamCraft.blacklist_coloration.add(str.toLowerCase());
+			}
 		}
 		
-		list = config.getStringList("item-enchant");
-		for (String str : list)	{
-			DreamCraft.blacklist_itemEnchant.add(str.toLowerCase());
+		if (config.isSet("item-enchant"))	{
+			list = config.getStringList("item-enchant");
+			for (String str : list)	{
+				DreamCraft.blacklist_itemEnchant.add(str.toLowerCase());
+			}
+		}
+		if (config.isSet("item-modify"))	{
+			list = config.getStringList("item-modify");
+			for (String str : list)	{
+				DreamCraft.blacklist_itemAnvil.add(str.toLowerCase());
+			}
 		}
 		
-		list = config.getStringList("enchant");
-		for (String str : list)	{
-			DreamCraft.blacklist_enchant.add(str.toLowerCase());
+		if (config.isSet("enchant"))	{
+			list = config.getStringList("enchant");
+			for (String str : list)	{
+				DreamCraft.blacklist_enchant.add(str.toLowerCase());
+			}
 		}
 		
-		list = config.getStringList("item-recipe");
-		for (String str : list)	{
-			
-			Material mat = Material.getMaterial(str.toUpperCase());
-			
-			Iterator<Recipe> it = pl.getServer().recipeIterator();
-			Recipe recipe;
-			while(it.hasNext())	{
-				recipe = it.next();
-				if (recipe != null && recipe.getResult().getType() == mat)	{
-					it.remove();
+		if (config.isSet("item-recipe"))	{
+			list = config.getStringList("item-recipe");
+			for (String str : list)	{
+				
+				Material mat = Material.getMaterial(str.toUpperCase());
+				
+				Iterator<Recipe> it = pl.getServer().recipeIterator();
+				Recipe recipe;
+				while(it.hasNext())	{
+					recipe = it.next();
+					if (recipe != null && recipe.getResult().getType() == mat)	{
+						it.remove();
+					}
 				}
 			}
 		}
@@ -74,6 +92,7 @@ public static void loadAllConfig(Map<String, PluginConfiguration> configs)	{
 		Language.noPerm = config.getString("noPerm").replace(DreamCraft.color, "§");		
 		Language.reload = config.getString("reload").replace(DreamCraft.color, "§");
 		Language.incompatibleItem = config.getString("incompatibleItem").replace(DreamCraft.color, "§");
+		Language.noEnchant = config.getString("forbiddenEnchant").replace(DreamCraft.color, "§");
 		
 	}
 
