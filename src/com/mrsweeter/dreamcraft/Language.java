@@ -6,5 +6,7 @@ public class Language {
 	public static String noPerm = "§cYou aren't allow do to this";
 	public static String reload = "§aReload complete";
 	public static String incompatibleItem = "§cThese items aren't compatible";
+	public static String prefix = "§c[§aDreamCraft§c] ";
+	public static String noEnchant = "§cThis enchant contains forbidden enchant";
 
 }

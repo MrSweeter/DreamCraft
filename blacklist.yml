@@ -8,3 +8,9 @@ item-incompatible:
   - leather_leggings
   - leather_boots
   - ink_sack
+item-enchant:
+  - diamond_sword
+  - diamond_pickaxe
+enchant:
+  - damage_all
+  - efficiency

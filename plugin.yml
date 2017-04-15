@@ -1,6 +1,6 @@
 name: DreamCraft
 main: com.mrsweeter.dreamcraft.DreamCraft
-version: 1.1
+version: 1.2
 author: MrSweeter / SweetDream
 description: Modify / Remove / Add crafts recipes
 
@@ -9,3 +9,8 @@ commands:
         description: Reload config !
         usage: §c/dcrreload
         permission: dreamcraft.reload
+    dcrhelp:
+        description: Show help !
+        usage: §c/dcrhelp
+        aliases: dcr
+        permission: dreamcraft.help

@@ -15,6 +15,7 @@ import com.mrsweeter.dreamcraft.Commands.Commands;
 import com.mrsweeter.dreamcraft.Config.Loader;
 import com.mrsweeter.dreamcraft.Config.PluginConfiguration;
 import com.mrsweeter.dreamcraft.Listeners.Craft;
+import com.mrsweeter.dreamcraft.Listeners.Enchantment;
 
 public class DreamCraft extends JavaPlugin	{
 	
@@ -25,6 +26,8 @@ public class DreamCraft extends JavaPlugin	{
 	Map<String, PluginConfiguration> configs = new HashMap<String, PluginConfiguration>();
 	public static List<String> blacklist_item = new ArrayList<String>();
 	public static List<String> blacklist_coloration = new ArrayList<String>();
+	public static List<String> blacklist_enchant = new ArrayList<String>();
+	public static List<String> blacklist_itemEnchant = new ArrayList<String>();
 	public static Map<Character, Material> converter = new HashMap<Character, Material>();
 	
 	public void onEnable()	{
@@ -38,8 +41,11 @@ public class DreamCraft extends JavaPlugin	{
 		Loader.loadConverter(configs.get("converter"));
 		Loader.loadCraft(this, configs.get("craft"));
 		
+		pm.registerEvents(new Enchantment(this), this);
 		pm.registerEvents(new Craft(this), this);
+		
 		getCommand("dcrreload").setExecutor(new Commands(this));
+		getCommand("dcrhelp").setExecutor(new Commands(this));
 		
 		log.info(Color.GREEN + "=============== " + Color.YELLOW + "DreamCraft enable" + Color.GREEN + " ===============" + Color.RESET);
 		

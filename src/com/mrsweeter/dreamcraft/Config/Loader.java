@@ -27,15 +27,28 @@ public static void loadAllConfig(Map<String, PluginConfiguration> configs)	{
 		
 		DreamCraft.blacklist_item.clear();
 		DreamCraft.blacklist_coloration.clear();
+		DreamCraft.blacklist_enchant.clear();
+		DreamCraft.blacklist_itemEnchant.clear();
 		pl.getServer().resetRecipes();
 		
 		List<String> list = config.getStringList("item-craft");
 		for (String str : list)	{
 			DreamCraft.blacklist_item.add(str.toLowerCase());
 		}
+		
 		list = config.getStringList("item-incompatible");
 		for (String str : list)	{
 			DreamCraft.blacklist_coloration.add(str.toLowerCase());
+		}
+		
+		list = config.getStringList("item-enchant");
+		for (String str : list)	{
+			DreamCraft.blacklist_itemEnchant.add(str.toLowerCase());
+		}
+		
+		list = config.getStringList("enchant");
+		for (String str : list)	{
+			DreamCraft.blacklist_enchant.add(str.toLowerCase());
 		}
 		
 		list = config.getStringList("item-recipe");
