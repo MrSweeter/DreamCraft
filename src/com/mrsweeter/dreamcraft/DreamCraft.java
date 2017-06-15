@@ -20,7 +20,7 @@ import com.mrsweeter.dreamcraft.Listeners.Enchantment;
 
 public class DreamCraft extends JavaPlugin	{
 	
-	static Logger log = Logger.getLogger("Minecraft");
+	public static Logger log = Logger.getLogger("Minecraft");
 	static PluginManager pm = Bukkit.getPluginManager();
 	public static String color = "&";
 	
@@ -46,6 +46,7 @@ public class DreamCraft extends JavaPlugin	{
 		pm.registerEvents(new Anvil(this), this);
 		pm.registerEvents(new Enchantment(this), this);
 		pm.registerEvents(new Craft(this), this);
+		pm.registerEvents(new com.mrsweeter.dreamcraft.Listeners.Merchant(this), this);
 		
 		getCommand("dcrreload").setExecutor(new Commands(this));
 		getCommand("dcrhelp").setExecutor(new Commands(this));

@@ -4,8 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Recipe;
 import org.bukkit.inventory.ShapedRecipe;
@@ -96,10 +99,12 @@ public static void loadAllConfig(Map<String, PluginConfiguration> configs)	{
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void loadCraft(DreamCraft pl, PluginConfiguration config) {
 		
 		for (String key :  config.getKeys(false))	{
 			
+			//DreamCraft.log.info("Creation of item " + key);
 			ConfigurationSection section = config.getConfigurationSection(key);
 			byte b = 0;
 			int quantity = 1;
@@ -113,24 +118,36 @@ public static void loadAllConfig(Map<String, PluginConfiguration> configs)	{
 			
 			if (section.isSet("craft"))	{
 				ConfigurationSection craft = section.getConfigurationSection("craft");
-				
+				int i = 0;
 				for (String recipe : craft.getKeys(false))	{
 					
-					ShapelessRecipe shape = new ShapelessRecipe(item);
+					ShapelessRecipe shape;
+					
+					if (Bukkit.getServer().getVersion().contains("1.12"))	{
+						shape = new ShapelessRecipe(new NamespacedKey(pl, key+"shapeless"+i), item);
+					} else {
+						shape = new ShapelessRecipe(item);
+					}
 					List<String> ingredients = craft.getStringList(recipe);
 					
 					for (String str : ingredients)	{
 						shape.addIngredient(Material.getMaterial(str.toUpperCase()));
 					}
 					pl.getServer().addRecipe(shape);
+					i++;
 				}
+				//DreamCraft.log.info("Craft shapeless complete");
 			}
 			if (section.isSet("shape"))	{
 				ConfigurationSection shapes = section.getConfigurationSection("shape");
-				
+				int i = 0;;
 				for (String recipe : shapes.getKeys(false))	{
-					
-					ShapedRecipe shape = new ShapedRecipe(item);
+					ShapedRecipe shape;
+					if (Bukkit.getServer().getVersion().contains("1.12"))	{
+						shape = new ShapedRecipe(new NamespacedKey(pl, key+"shape"+i), item);
+					} else {
+						shape = new ShapedRecipe(item);
+					}
 					List<String> shapeChar = shapes.getStringList(recipe);
 					
 					if (shapeChar.size() == 3)	{
@@ -145,9 +162,25 @@ public static void loadAllConfig(Map<String, PluginConfiguration> configs)	{
 						}
 						pl.getServer().addRecipe(shape);
 					}
+					i++;
+					//DreamCraft.log.info("Craft with shape complete");
 				}
 			}
+			if (section.isSet("furnace"))	{
+				ConfigurationSection furnace = section.getConfigurationSection("furnace");
+				
+				List<String> toCook = furnace.getStringList("to-cook");
+				
+				for (String str : toCook)	{
+					
+					Material source = Material.getMaterial(str.toUpperCase());
+					FurnaceRecipe recipe = new FurnaceRecipe(item, source);
+					pl.getServer().addRecipe(recipe);
+				}
+				//DreamCraft.log.info("Furnace recipe complete");
+			}
 		}
+		//DreamCraft.log.info("craft.yml loaded");
 	}
 
 	public static void loadConverter(PluginConfiguration config) {
